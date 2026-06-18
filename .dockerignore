@@ -1,0 +1,11 @@
+LICENSE
+README.md
+.git
+.gitignore
+docker-compose.yml
+Dockerfile
+.dockerignore
+.env
+xray-config.json
+config.yml
+credentials.json
