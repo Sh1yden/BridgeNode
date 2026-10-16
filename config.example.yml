@@ -1,0 +1,16 @@
+tunnel: tunnel_uid
+credentials-file: /etc/cloudflared/.credentials.json
+
+ingress:
+  # 1. Service 1
+  - hostname: example.url.ru
+    service: http://localserviceardress:port
+
+  # 1. Service 2
+  - hostname: example.url.ru
+    service: http://localserviceardress:port
+
+  # and more services...
+
+  # wrong adress -> answer 404
+  - service: http_status:404

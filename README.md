@@ -41,12 +41,12 @@
 
 2. **Добавить конфигурационные файлы** (не включены, в gitignore)
 
-```
-   xray-config.json     # Конфигурация Xray-клиента
-   config.yml           # Конфигурация cloudflared тоннеля
-   credentials.json     # Credentials Cloudflare тоннеля
-   .env                 # Переменные окружения
-```
+- xray-config.json  # Конфигурация Xray-клиента
+- config.yml        # Конфигурация cloudflared тоннеля => [Пример заполнения](config.example.yml)
+- credentials.json  # Credentials Cloudflare тоннеля => [Пример заполнения](credentials.example.json)
+- .env              # Переменные окружения             => [Пример заполнения](.env.example)
+
+Теперь xray контейнер и config **необязателен**.
 
 3. **Создать внешнюю сеть** (если ещё не создана)
 

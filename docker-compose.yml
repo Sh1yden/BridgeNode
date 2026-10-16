@@ -4,7 +4,7 @@ services:
     container_name: xray_client
     restart: unless-stopped
     volumes:
-      - ./xray-config.json:/etc/xray/config.json
+      - ./xray-config.json:/etc/xray/config.json:ro
     networks:
       - egress_internal
 
@@ -18,19 +18,15 @@ services:
       - ./config.yml:/etc/cloudflared/config.yml:ro
       - ./credentials.json:/etc/cloudflared/.credentials.json:ro
     environment:
-      # Проксируем трафик через SOCKS5 контейнера xray
-      - HTTPS_PROXY=socks5://xray_client:10808
       - TUNNEL_TRANSPORT_PROTOCOL=http2
-      - NO_PROXY=localhost,127.0.0.1,my-dev-portfolio,linkcutter_api
-    env_file:
-      - .env
-    depends_on:
-      - xray-client
+      - HTTPS_PROXY=${HTTPS_PROXY:-}
+      - NO_PROXY=localhost,127.0.0.1,my-dev-portfolio,linkcutter_api,zenith,syncnode,nodya,notes
     networks:
-      - egress_internal # Для связи с прокси
-      - internet_bridge # Для доступа к linkcutter_api и my-dev-portfolio
+      - egress_internal
+      - internet_bridge
 
 networks:
-  egress_internal: # Внутренняя приватная сеть между xray и cloudflared
+  egress_internal:
+    driver: bridge
   internet_bridge:
     external: true
